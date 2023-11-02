@@ -1,0 +1,13 @@
+#program take department as an input and display documents of all workers of the department
+
+from  pymongo import MongoClient
+client=MongoClient("mongodb+srv://tejasvini:mongodb123@cluster0.5jhh2uk.mongodb.net/?retryWrites=true&w=majority")
+db=client["office"]
+coll=db["workers"]
+
+dept=input("Enter Department : ")
+dic={}
+dic["dept"]=dept
+
+for doc in coll.find(dic):
+    print(doc)

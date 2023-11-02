@@ -1,0 +1,29 @@
+# program to take input from the user and add employee data as a document in the collection (ex. ID, empnm, dept, post, city, salary, mobile, email)
+
+from pymongo import MongoClient
+client=MongoClient("mongodb+srv://tejasvini:mongodb123@cluster0.5jhh2uk.mongodb.net/?retryWrites=true&w=majority")
+db=client["office"]
+coll=db["workers"]
+
+e_id=input("Enter worker id : ")
+empnm=input("Enter Employee name : ")
+dept=input("Enter Department : ")
+post=input("Enter Post : ")
+city =input("Enter City : ")
+salary=float(input("Enter Salary : "))
+mobile =input("Enter Mobile numer : ")
+email=input("Enter Email : ")
+
+dic={}
+dic["_id"]=e_id
+dic["empnm"]=empnm
+dic["dept"]=dept
+dic["post"]=post
+dic["city"]=city
+dic["salary"]=salary
+dic["mobile"]=mobile
+dic["email"]=email
+
+print(dic)
+coll.insert_one(dic)
+print("One Employee inserted successfully")

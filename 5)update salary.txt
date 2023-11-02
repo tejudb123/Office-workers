@@ -1,0 +1,28 @@
+#program to accept ID and new salary of the worker. Update the document with new salary. Display the document after updation.
+
+from pymongo import MongoClient
+client=MongoClient("mongodb+srv://tejasvini:mongodb123@cluster0.5jhh2uk.mongodb.net/?retryWrites=true&w=majority")
+db=client["office"]
+coll=db["workers"]
+
+#db.workers.updateOne({},{$set:{}})
+w_id=input("Enter Employee ID : ")
+dic={}
+dic["_id"]=w_id
+for doc in coll.find(dic):
+    print(doc)
+
+salary=float(input("Enter new Salary : "))
+dic1={}
+dic1["salary"]=salary
+
+upd={"$set":dic1}
+
+coll.update_one(dic,upd)
+print("New salary : ")
+for doc1 in coll.find(dic1):
+ print(doc1)
+print("Salary updated successfully")
+
+
+

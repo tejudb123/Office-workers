@@ -1,0 +1,13 @@
+#program take ID as input, search and display the worker document
+
+from pymongo import MongoClient
+client=MongoClient("mongodb+srv://tejasvini:mongodb123@cluster0.5jhh2uk.mongodb.net/?retryWrites=true&w=majority")
+db=client["office"]
+coll=db["workers"]
+
+e_id=input("Enter Employee ID : ")
+dic={}
+dic["_id"]=e_id
+
+for doc in coll.find(dic):
+    print(doc)

@@ -1,0 +1,47 @@
+
+
+# program to accept ID, city and department. Update the document with new city and department of the worker.
+
+from pymongo import MongoClient
+client=MongoClient("mongodb+srv://tejasvini:mongodb123@cluster0.5jhh2uk.mongodb.net/?retryWrites=true&w=majority")
+db=client["office"]
+coll=db["workers"]
+
+e_id=input("Enter employee ID : ")
+dic={}
+dic["_id"]=e_id
+print("Before updation : ")
+for doc in coll.find(dic):
+    print(doc)
+
+city=input("Enter City : ")
+dic1={}
+dic1["city"]=city
+
+dept=input("Enter Department : ")
+dic2={}
+dic2["dept"]=dept
+
+#coll.update_one({},{$set:{}})
+upd={"$set":dic1}
+coll.update_one(dic,upd)
+
+upd1={"$set":dic2}
+coll.update_one(dic,upd1)
+
+for doc1 in coll.find(dic2):
+    print("After Updation")
+    print(doc1)
+
+
+
+C:\Users\NEXUS\PycharmProjects\pythonProject\venv\Scripts\python.exe "C:\Users\NEXUS\PycharmProjects\pythonProject\6)update city, dept.py" 
+Enter employee ID : 101
+Before updation : 
+{'_id': '101', 'empnm': 'Rilley Washington', 'dept': 'Sales', 'post': 'Sr. Manager', 'city': 'Mumbai', 'salary': 45000.0, 'mobile': '9087654321', 'email': 'RilleyWashington@gmail.com'}
+Enter City : Nashik
+Enter Department : Serive
+After Updation
+{'_id': '101', 'empnm': 'Rilley Washington', 'dept': 'Serive', 'post': 'Sr. Manager', 'city': 'Nashik', 'salary': 45000.0, 'mobile': '9087654321', 'email': 'RilleyWashington@gmail.com'}
+
+Process finished with exit code 0
